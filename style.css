@@ -205,9 +205,10 @@ button{
 .result-text{
   border:2px solid #000;
   border-radius:14px;
-  padding:14px;
+  padding:20px;
   min-height:150px;     /* ✅ 박스는 ‘조금 줄이고’ 싶다 했지만, 글씨 키우면 높이도 필요 */
-  font-size:16px;       /* ✅ 기존 13 → 16 (2배 체감) */
+  font-size:24px;       /* ✅ 기존 13 → 16 (2배 체감) */
   line-height:1.45;
   word-break:break-word;
 }
+
