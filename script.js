@@ -31,8 +31,9 @@ inputs.innerHTML += `
       <span class="side">수 <b id="sPct${i}">50%</b></span>
     </div>
 
-    <textarea id="text${i}" placeholder="텍스트 작성"></textarea>
-    <div class="char-count" id="count${i}">0/${MAX_CHARS}</div>
+<textarea id="text${i}" placeholder="텍스트 작성" maxlength="${MAX_CHARS}"></textarea>
+<div class="counter" id="count${i}">0/${MAX_CHARS}</div>
+
   </div>
 `;
   resultList.innerHTML += `
@@ -74,7 +75,7 @@ members.forEach((_, i) => {
 members.forEach((_, i) => {
   const textarea = document.getElementById(`text${i}`);
   const counter = document.getElementById(`counter${i}`);
-  const MAX = 80;
+  const MAX = 100;
 
   const updateCount = () => {
     // 혹시 모를 초과 입력 방지
@@ -254,6 +255,7 @@ window.addEventListener("resize", () => {
   const result = document.getElementById("result");
   if (result && getComputedStyle(result).display !== "none") updatePreviewScale();
 });
+
 
 
 
