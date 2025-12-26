@@ -110,11 +110,8 @@ function saveImage() {
     a.click();
   });
 }
-<div id="result">
-  <div id="capture">
-    <!-- 결과 카드들 -->
-  </div>
-</div>
+
+
 
 
 
