@@ -125,7 +125,7 @@ button{
   display:flex;
   justify-content:space-between;
   align-items:center;
-  margin-bottom:26px;
+  margin-bottom:40px;
 }
 
 .title-wrap{
@@ -169,7 +169,7 @@ button{
   display:flex;
   height: 100%;
   gap:16px;
-  align-items:flex-start;
+  align-items:center;
 }
 
 .card img{
@@ -219,6 +219,7 @@ button{
   text-align: left;
   word-break:break-word;
 }
+
 
 
 
