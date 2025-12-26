@@ -19,31 +19,47 @@
   <!-- 입력 화면 -->
   <div id="controls">
     <h2>공수취향표 생성</h2>
+
+    <!-- ✅ OTP 입력칸(맨 위) -->
+    <div class="otp-input-row">
+      <span class="otp-tag">OTP</span>
+      <input id="otpIn" type="text" maxlength="8" placeholder="OTP를 적어주세요.(최대8자)" />
+    </div>
+
     <div id="inputs"></div>
     <button type="button" onclick="generate()">결과 생성</button>
   </div>
 
   <!-- 결과 화면 -->
   <div id="result">
-    <!-- 화면에서만 축소해서 보여주는 프리뷰 래퍼 -->
     <div id="preview">
-      <!-- 저장 대상(원본 1200x900 고정) -->
       <div class="canvas" id="capture">
+        <!-- ✅ 헤더: 왼쪽 OTP / 가운데 타이틀 / 오른쪽 크레딧 -->
         <div class="header">
-          <div class="title-wrap">
-            <img class="logo" src="https://i.imgur.com/lxO0ay6.png" alt="logo" />
-            <h1>공수취향표</h1>
+          <div class="header-left">
+            <div class="otp-display">
+              <span class="otp-tag">OTP</span>
+              <span class="otp-text" id="otpOut"></span>
+            </div>
           </div>
-          <div class="credit">@shinanddo</div>
+
+          <div class="header-center">
+            <div class="title-wrap">
+              <img class="logo" src="https://i.imgur.com/lxO0ay6.png" alt="logo" />
+              <h1>공수취향표</h1>
+            </div>
+          </div>
+
+          <div class="header-right">
+            <div class="credit">@shinanddo</div>
+          </div>
         </div>
 
         <div class="grid" id="resultList"></div>
       </div>
     </div>
 
-    <!-- ✅ 버튼은 preview 바깥: 축소/overflow 영향 안 받게 -->
     <button type="button" onclick="saveImage()">이미지 저장</button>
   </div>
 </body>
 </html>
-
