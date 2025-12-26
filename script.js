@@ -27,7 +27,7 @@ members.forEach((m, i) => {
   <span class="side">수 <b id="sPct${i}">50%</b></span>
 </div>
 
-      <textarea id="text${i}" placeholder="텍스트 작성 부분"></textarea>
+      <textarea id="text${i}" placeholder="텍스트 작성"></textarea>
     </div>
   `;
 
@@ -115,6 +115,7 @@ function saveImage() {
     <!-- 결과 카드들 -->
   </div>
 </div>
+
 
 
 
