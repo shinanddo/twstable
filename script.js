@@ -10,8 +10,8 @@ const members = [
 const STEP = 10;            // 10% 단위
 const FIXED_WIDTH = 50;     // 결과 바 길이 항상 50%
 const MAX_CHARS = 100;      // 한글 기준 100자 제한(띄어쓰기 포함)
-const FONT_BASE = 24;       // 기본 12
-const FONT_MIN = 20;        // 최소 10
+const FONT_BASE = 20;       // 기본 12
+const FONT_MIN = 16;        // 최소 10
 
 const inputs = document.getElementById("inputs");
 const resultList = document.getElementById("resultList");
@@ -73,14 +73,20 @@ members.forEach((_, i) => {
 
 // ====== 텍스트 폰트 자동 축소(12 -> 최소 10), 100자 제한 ======
 function fitTextBox(el, text) {
+  // 텍스트 넣고 기본 폰트(20px)로 시작
   el.textContent = text || " ";
   el.style.fontSize = `${FONT_BASE}px`;
 
-  // 박스 높이를 넘치면 폰트 줄임
+  // 박스 높이를 넘치면 20 -> 16까지만 줄임
   for (let size = FONT_BASE; size >= FONT_MIN; size--) {
     el.style.fontSize = `${size}px`;
+    // +1은 브라우저 반올림 오차 방지
     if (el.scrollHeight <= el.clientHeight + 1) break;
   }
+
+  // 남는 텍스트는 잘리도록(요청대로)
+  // CSS로 overflow hidden이 이미 있으면 없어도 되는데, 안전하게 강제
+  el.style.overflow = "hidden";
 }
 
 // ====== 결과 생성 ======
@@ -231,11 +237,4 @@ window.addEventListener("resize", () => {
   const result = document.getElementById("result");
   if (result && getComputedStyle(result).display !== "none") updatePreviewScale();
 });
-
-
-
-
-
-
-
 
