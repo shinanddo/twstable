@@ -117,6 +117,7 @@ function generate() {
 
   document.getElementById("controls").style.display = "none";
   document.getElementById("result").style.display = "block";
+  document.getElementById("result").scrollIntoView({ behavior: "smooth" });
 }
 
 /* 이미지 저장 */
@@ -136,5 +137,6 @@ function saveImage() {
     console.error(err);
   });
 }
+
 
 
