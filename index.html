@@ -16,26 +16,22 @@
 
 <!-- 입력 화면 -->
 <div id="controls">
-  <h2>TWS 공수취향표</h2>
+  <h2>공수취향표 생성</h2>
   <div id="inputs"></div>
   <button onclick="generate()">결과 생성</button>
 </div>
 
 <!-- 결과 화면 -->
 <div id="result">
-  <div class="header">
-    <div class="title-wrap">
-      <img src="https://i.imgur.com/lxO0ay6.png" class="logo" alt="logo">
+  <div class="canvas" id="capture">
+    <div class="header">
       <h1>공수취향표</h1>
+      <div class="credit">@shinanddo</div>
     </div>
-    <div class="credit">@shinanddo</div>
+    <div class="grid" id="resultList"></div>
   </div>
-
-  <div id="resultList"></div>
-
   <button onclick="saveImage()">이미지 저장</button>
 </div>
-
 
 </body>
 </html>
