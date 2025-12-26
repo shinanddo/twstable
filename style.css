@@ -229,5 +229,7 @@ button{
   line-height:1.25;              /* 살짝만 여유 */
   overflow:hidden;
   text-align:left;
+  align-items: center;
   word-break:break-word;
 }
+
