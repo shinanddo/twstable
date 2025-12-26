@@ -90,6 +90,8 @@ button{
   height:900px;
   background:#fff;
   padding:48px;               /* ✅ 저장 여백(마진) */
+  display: flex;
+  flex-direction: column;
 }
 
 /* ✅ 프리뷰에서만 맞춰서 축소 */
@@ -133,7 +135,7 @@ button{
 }
 
 .header h1{
-  font-size:30px;   /* 제목 가독성 ↑ */
+  font-size:32px;   /* 제목 가독성 ↑ */
   margin:0;
 }
 
@@ -147,22 +149,25 @@ button{
 .credit{
   background:#000;
   color:#fff;
-  font-size:8px;   /* ✅ 기존 6px 너무 작음 */
+  font-size:10px;   /* ✅ 기존 6px 너무 작음 */
   font-family: 'Noto Sans KR', sans-serif;
-  padding:8px 11px;
+  padding:10px 14px;
   border-radius:999px;
 }
 
 /* 2x3 그리드: 꽉 찬 느낌 줄이기 */
 .grid{
+  flex: 1; 
   display:grid;
   grid-template-columns: 1fr 1fr;
-  gap:36px 40px;  /* ✅ 간격 늘림 */
+  grid-template-rows: repeat(3, 1fr);
+  gap:32px 36px;  /* ✅ 간격 늘림 */
 }
 
 /* 카드 레이아웃: 바/텍스트 살짝 작게 */
 .card{
   display:flex;
+  height: 100%;
   gap:16px;
   align-items:flex-start;
 }
@@ -214,6 +219,7 @@ button{
   text-align: left;
   word-break:break-word;
 }
+
 
 
 
