@@ -167,7 +167,7 @@ function saveImage() {
 
     const a = document.createElement("a");
     a.href = out.toDataURL("image/png");
-    a.download = "gong_su_1200x900.png";
+    a.download = "twsrps.png";
     a.click();
   }).catch((err) => {
     alert("이미지 저장 실패: CORS 또는 렌더링 문제일 수 있어요.");
@@ -231,6 +231,7 @@ window.addEventListener("resize", () => {
   const result = document.getElementById("result");
   if (result && getComputedStyle(result).display !== "none") updatePreviewScale();
 });
+
 
 
 
