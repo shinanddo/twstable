@@ -59,19 +59,30 @@ members.forEach((_, i) => {
 /* 결과 생성 */
 function generate() {
   members.forEach((_, i) => {
-const g = Number(document.getElementById(`range${i}`).value);
-const s = 100 - g;
+    const g = Number(document.getElementById(`range${i}`).value);
+    const s = 100 - g;
 
-const bar = document.getElementById(`bar${i}`);
+    const bar = document.getElementById(`bar${i}`);
 
-// 색칠된 바의 길이 (공/수 중 더 작은 쪽 기준)
-const fillWidth = Math.min(g, s) * 2;
+    // 차이값 (0~100)
+    const diff = Math.abs(g - s);
 
-// 가운데 기준 위치 계산
-const left = 50 - fillWidth / 2;
+    // 최소 표시 길이 (완전 50/50이어도 보이게)
+    const width = diff === 0 ? 6 : diff;
 
-bar.style.width = fillWidth + "%";
-bar.style.left = left + "%";
+    // 중앙 기준 이동
+    // g > s → 왼쪽, s > g → 오른쪽
+    let left;
+    if (g === s) {
+      left = 50 - width / 2;
+    } else if (g > s) {
+      left = 50 - width;
+    } else {
+      left = 50;
+    }
+
+    bar.style.width = width + "%";
+    bar.style.left = left + "%";
 
     document.getElementById(`resultText${i}`).innerText =
       document.getElementById(`text${i}`).value || " ";
@@ -95,5 +106,6 @@ function saveImage() {
     <!-- 결과 카드들 -->
   </div>
 </div>
+
 
 
