@@ -54,53 +54,61 @@ members.forEach((_, i) => {
   const gPct = document.getElementById(`gPct${i}`);
   const sPct = document.getElementById(`sPct${i}`);
 
+  const STEP = 10;
+
   const sync = () => {
-    const g = Number(r.value);
+    const snapped = Math.round(Number(r.value) / STEP) * STEP;
+    const g = snapped;
     const s = 100 - g;
     gPct.textContent = `${g}%`;
     sPct.textContent = `${s}%`;
   };
 
   r.addEventListener("input", sync);
-  sync(); // 초기값도 즉시 반영
+  r.addEventListener("change", () => {
+    // 손 떼면 슬라이더 값 자체도 스냅
+    r.value = Math.round(Number(r.value) / STEP) * STEP;
+    sync();
+  });
+
+  sync();
 });
 
 /* 결과 생성 */
 function generate() {
+  const FIXED_WIDTH = 50; // 항상 50% 길이
+  const STEP = 10;        // 10% 단위
+
   members.forEach((_, i) => {
-    const g = Number(document.getElementById(`range${i}`).value);
+    const r = document.getElementById(`range${i}`);
+    let g = Number(r.value);
+
+    // 10% 단위로 스냅(반올림)
+    g = Math.round(g / STEP) * STEP;
+    r.value = g; // 슬라이더 손 떼면 값도 맞춰짐
+
     const s = 100 - g;
 
-    const bar = document.getElementById(`bar${i}`);
-
-const FIXED_WIDTH = 50; // 색칠된 바는 항상 50%
-const STEP = 10;       // 10% 단위 이동
-
-// 50을 기준으로 얼마나 차이 나는지
-const delta = Math.round((g - 50) / STEP) * STEP;
-
-// 중앙 기준 left 값
-let left = 25 - delta / 2;
-
-// 안전장치 (범위 벗어나지 않게)
-left = Math.max(0, Math.min(50, left));
-
-bar.style.width = FIXED_WIDTH + "%";
-bar.style.left = left + "%";
-
-
-    // 중앙 기준 이동
-    // g > s → 왼쪽, s > g → 오른쪽
-    let left;
-    if (g === s) {
-      left = 50 - width / 2;
-    } else if (g > s) {
-      left = 50 - width;
-    } else {
-      left = 50;
+    // 입력쪽 퍼센트도 즉시 동기화
+    const gPct = document.getElementById(`gPct${i}`);
+    const sPct = document.getElementById(`sPct${i}`);
+    if (gPct && sPct) {
+      gPct.textContent = `${g}%`;
+      sPct.textContent = `${s}%`;
     }
 
-    bar.style.width = width + "%";
+    // ✅ 결과 바: 길이 고정 + 위치만 이동
+    const bar = document.getElementById(`bar${i}`);
+
+    // g=50 -> left=25 (중앙)
+    // g가 커질수록 left 감소(왼쪽 이동), g가 작아질수록 left 증가(오른쪽 이동)
+    const shift = (50 - g) / 2;     // -25 ~ +25
+    let left = 25 + shift;          // 0 ~ 50
+
+    // 안전 범위
+    left = Math.max(0, Math.min(50, left));
+
+    bar.style.width = FIXED_WIDTH + "%";
     bar.style.left = left + "%";
 
     document.getElementById(`resultText${i}`).innerText =
@@ -128,6 +136,7 @@ function saveImage() {
     console.error(err);
   });
 }
+
 
 
 
