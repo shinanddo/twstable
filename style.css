@@ -134,7 +134,7 @@ button {
 }
 
 .bar {
-  position: relative;
+  position: relative;   /* 기준점 */
   flex: 1;
   height: 12px;
   border: 1px solid #000;
@@ -143,10 +143,12 @@ button {
 }
 
 .bar-inner {
-  position: absolute;
+  position: absolute;   /* 이동 가능 */
   top: 0;
   height: 100%;
   background: #000;
+  border-radius: 6px;
+}
 }
 
 .result-text {
@@ -156,4 +158,5 @@ button {
   font-size: 13px;
   min-height: 60px;
 }
+
 
