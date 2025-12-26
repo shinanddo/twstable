@@ -72,23 +72,6 @@ members.forEach((_, i) => {
   sync();
 });
 
-members.forEach((_, i) => {
-  const textarea = document.getElementById(`text${i}`);
-  const counter = document.getElementById(`counter${i}`);
-  const MAX = 100;
-
-  const updateCount = () => {
-    // 혹시 모를 초과 입력 방지
-    if (textarea.value.length > MAX) {
-      textarea.value = textarea.value.slice(0, MAX);
-    }
-    counter.textContent = `${textarea.value.length} / ${MAX}`;
-  };
-
-  textarea.addEventListener("input", updateCount);
-  updateCount(); // 초기값
-});
-
 // ====== 텍스트 폰트 자동 축소(12 -> 최소 10), 100자 제한 ======
 function fitTextBox(el, text) {
   // 텍스트 넣고 기본 폰트(20px)로 시작
@@ -255,6 +238,7 @@ window.addEventListener("resize", () => {
   const result = document.getElementById("result");
   if (result && getComputedStyle(result).display !== "none") updatePreviewScale();
 });
+
 
 
 
