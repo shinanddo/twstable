@@ -81,21 +81,23 @@ button{
 }
 
 /* ✅ 저장용 원본 캔버스: 항상 1200x900 고정 */
-.canvas{
-  width:1200px;
-  height:900px;
-  background:#fff;
-  padding:40px 50px;
-  display:flex;
-  flex-direction:column;
-  gap:26px;
+.canvas {
+  width: 1200px;
+  height: 900px;
+  padding: 30px;
+  background: #fff;
+
+  display: flex;
+  flex-direction: column;
 }
 
 /* 헤더: 왼쪽 제목/로고, 오른쪽 출처 */
-.header{
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
+.header {
+  flex: 0 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 18px;
 }
 
 .title-wrap{
@@ -126,20 +128,22 @@ button{
 }
 
 /* ✅ 2x3 그리드: 남는 공백 없게 꽉 채움 */
-.grid{
-  flex:1; /* 헤더 아래 남은 높이 전부 사용 */
-  display:grid;
+.grid {
+  flex: 1 1 auto;
+
+  display: grid;
   grid-template-columns: 1fr 1fr;
-  grid-template-rows: repeat(3, 1fr);
-  gap:26px 34px;
+  grid-template-rows: repeat(3, 1fr); /* ✅ 2x3 고정 */
+  gap: 18px 20px;
+  align-content: stretch;
 }
 
 /* 카드 */
-.card{
-  display:flex;
-  gap:18px;
-  align-items:center; /* 사진과 내용 수직 정렬 */
-  min-height:0;
+.card {
+  height: 100%;
+  display: flex;
+  gap: 12px;
+  align-items: center;
 }
 
 .card img{
@@ -150,9 +154,11 @@ button{
 }
 
 /* 오른쪽 영역(바+텍스트) */
-.content{
-  flex:1;
-  min-width:0;
+.content {
+  flex: 1;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
 }
 
 /* 바 줄 */
@@ -185,19 +191,21 @@ button{
 }
 
 /* 텍스트 박스: 참고 이미지처럼 큼 */
-.result-text{
-  border:2px solid #000;
-  border-radius:18px;
-  padding:18px 20px;
-  font-size:12px;         /* 기본 12 */
-  line-height:1.35;
-  min-height:140px;       /* 박스 높이 고정 */
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  text-align:center;
-  word-break:keep-all;
-  overflow:hidden;
+.result-text {
+  flex: 1 1 auto;
+  min-height: 0;
+
+  border: 1px solid #000;
+  border-radius: 10px;
+  padding: 8px;
+
+  font-size: 12px;
+  line-height: 1.35;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
 }
 
 /* 버튼 영역(캔버스 밖): transform 영향 안 받게 */
@@ -211,19 +219,32 @@ button{
    - 저장은 1200x900 그대로
 ========================= */
 
-#capture{
-  transform-origin: top left;
+#preview {
+  width: 100%;
+  overflow: hidden;
 }
 
-/* 모바일/작은 화면에서 캔버스를 화면 너비에 맞게 축소 */
-@media (max-width: 900px){
-  #capture{
-    transform: scale(var(--preview-scale, 1));
+/* 기본: PC에서는 캔버스가 크니까 스크롤 허용 */
+#result {
+  overflow-x: auto;
+}
+
+/* ✅ 모바일: 화면 폭에 맞춰 미리보기 축소 */
+@media (max-width: 480px) {
+  #result {
+    overflow-x: hidden;
+  }
+
+  /* 1200px 캔버스를 viewport 폭에 맞춰 축소 */
+  #capture {
+    transform-origin: top left;
+    transform: scale(calc(100vw / 1200));
+  }
+
+  /* 축소된 높이만큼 preview가 따라오게 (정방형 방지) */
+  #preview {
+    height: calc(900px * (100vw / 1200));
   }
 }
 
-/* 아주 작은 폰에서는 버튼 글자 커보이게 */
-@media (max-width: 480px){
-  button{ font-size:18px; padding:16px; }
-}
 
