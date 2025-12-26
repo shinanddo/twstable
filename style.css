@@ -147,8 +147,9 @@ button{
 .credit{
   background:#000;
   color:#fff;
-  font-size:6px;   /* ✅ 기존 6px 너무 작음 */
-  padding:6px 10px;
+  font-size:8px;   /* ✅ 기존 6px 너무 작음 */
+  font-family: 'Noto Sans KR', sans-serif;
+  padding:8px 11px;
   border-radius:999px;
 }
 
@@ -213,6 +214,7 @@ button{
   text-align: left;
   word-break:break-word;
 }
+
 
 
 
