@@ -7,7 +7,7 @@ body{
   background:#fff;
 }
 
-/* ---------- 공통 ---------- */
+/* 공통 버튼 */
 button{
   width:100%;
   padding:14px;
@@ -19,7 +19,7 @@ button{
   margin-top:16px;
 }
 
-/* ---------- 입력 화면 ---------- */
+/* 입력 화면 */
 #controls{ display:block; }
 
 .member-control{
@@ -36,8 +36,7 @@ button{
 }
 
 .member-header img{
-  width:46px;
-  height:46px;
+  width:46px; height:46px;
   border-radius:50%;
   object-fit:cover;
 }
@@ -49,6 +48,7 @@ button{
   font-size:13px;
   margin-top:10px;
 }
+
 .range-row input[type=range]{ flex:1; }
 
 .range-row .side{
@@ -71,184 +71,143 @@ button{
   font-size:13px;
 }
 
-/* ---------- 결과 화면 ---------- */
+/* 결과 화면 */
 #result{ display:none; }
 
-/* 결과 화면에서 캔버스를 “미리보기용으로” 담는 래퍼 */
-#result .preview-wrap{
+/* ✅ 화면용 프리뷰(여기서만 축소) */
+#preview{
   width:100%;
-  overflow:hidden;     /* 모바일에서 가로 넘침 방지 */
+  max-width:100vw;
+  margin:0 auto;
+  aspect-ratio:4/3;
+  overflow:hidden;
+  border-radius:0;
 }
 
-/* ✅ 저장용 원본 캔버스: 항상 1200x900 고정 */
-.canvas {
-  width: 1200px;
-  height: 900px;
-  padding: 50px;
-  background: #fff;
-
-  display: flex;
-  flex-direction: column;
+/* ✅ 원본 캔버스(저장 기준) */
+#capture.canvas{
+  width:1200px;
+  height:900px;
+  background:#fff;
+  padding:48px;               /* ✅ 저장 여백(마진) */
 }
 
-/* 헤더: 왼쪽 제목/로고, 오른쪽 출처 */
-.header {
-  flex: 0 0 auto;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 20px;
+/* ✅ 프리뷰에서만 맞춰서 축소 */
+#preview #capture{
+  transform-origin: top left;
+}
+
+/* PC에서도 프리뷰는 화면폭에 맞춰 축소 */
+@media (min-width:481px){
+  #preview{
+    max-width:1200px;
+  }
+  #preview #capture{
+    transform: scale(calc(min(1200px, 100vw) / 1200));
+  }
+}
+
+/* 모바일에서 프리뷰는 화면폭에 맞춰 축소(4:3 유지) */
+@media (max-width:480px){
+  #preview{
+    width:100%;
+    aspect-ratio:4/3;
+  }
+  #preview #capture{
+    transform: scale(calc(100vw / 1200));
+  }
+}
+
+/* 헤더 */
+.header{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  margin-bottom:26px;
 }
 
 .title-wrap{
   display:flex;
   align-items:center;
-  gap:8px;
+  gap:10px;
 }
 
 .header h1{
+  font-size:30px;   /* 제목 가독성 ↑ */
   margin:0;
-  font-size:24px;
-  line-height:1;
 }
 
 .logo{
-  height: 1.8em;        /* 글자 높이 기준 */
-  width: auto;
-  display: inline-block;
-  vertical-align: middle;
+  height:2em;       /* 글자 높이와 동일 */
+  width:auto;
+  display:block;
+  object-fit:contain;
 }
 
 .credit{
   background:#000;
   color:#fff;
-  font-size:14px;
-  padding:8px 14px;
+  font-size:6px;   /* ✅ 기존 6px 너무 작음 */
+  padding:6px 10px;
   border-radius:999px;
 }
 
-/* ✅ 2x3 그리드: 남는 공백 없게 꽉 채움 */
-.grid {
-  flex: 1 1 auto;
-
-  display: grid;
+/* 2x3 그리드: 꽉 찬 느낌 줄이기 */
+.grid{
+  display:grid;
   grid-template-columns: 1fr 1fr;
-  grid-template-rows: repeat(3, 1fr); /* ✅ 2x3 고정 */
-  gap: 34px 40px;
-  align-content: stretch;
+  gap:32px 34px;  /* ✅ 간격 늘림 */
 }
 
-/* 카드 */
-.card {
-  height: 100%;
-  display: flex;
-  gap: 14px;
-  align-items: center;
+/* 카드 레이아웃: 바/텍스트 살짝 작게 */
+.card{
+  display:flex;
+  gap:16px;
+  align-items:flex-start;
 }
 
 .card img{
-  width:150px;     /* 참고 이미지: 원형 큰 사진 */
-  height:150px;
+  width:120px; height:120px;  /* 사진은 좀 키우는 게 저장 시 보기 좋음 */
   border-radius:50%;
   object-fit:cover;
 }
 
-/* 오른쪽 영역(바+텍스트) */
-.content {
-  flex: 1;
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-}
+.content{ flex:1; }
 
-/* 바 줄 */
+/* 바 */
 .bar-wrap{
   display:flex;
   align-items:center;
   gap:10px;
-  font-size:18px;
+  font-size:16px;     /* ✅ 라벨 가독성 ↑ */
   margin-bottom:12px;
 }
 
 .bar{
   position:relative;
   width:100%;
-  height:18px;
+  height:16px;        /* ✅ 조금 두껍게(저장 시 선명) */
   background:#eee;
-  border: 1.5px solid #000;
+  border:1px solid #000;  /* ✅ 전체 회색 바에도 테두리 */
   border-radius:999px;
   overflow:hidden;
 }
 
-/* 검은 막대(항상 50% 길이, left만 JS로 움직임) */
 .bar-inner{
   position:absolute;
   top:0;
   height:100%;
   background:#000;
   border-radius:999px;
-  left:25%;
-  width:50%;
 }
 
-/* 텍스트 박스: 참고 이미지처럼 큼 */
-.result-text {
-  flex: 1 1 auto;
-  min-height: 0;
-
-  border: 1px solid #000;
-  border-radius: 10px;
-  padding: 10px;
-
-  font-size: 18px;
-  line-height: 1.45;
-
-  display: flex;
-  align-items: left;
-  justify-content: center;
-  text-align: center;
+/* 텍스트 박스 */
+.result-text{
+  border:2px solid #000;
+  border-radius:14px;
+  padding:14px;
+  min-height:150px;     /* ✅ 박스는 ‘조금 줄이고’ 싶다 했지만, 글씨 키우면 높이도 필요 */
+  font-size:16px;       /* ✅ 기존 13 → 16 (2배 체감) */
+  line-height:1.45;
+  word-break:break-word;
 }
-
-/* 버튼 영역(캔버스 밖): transform 영향 안 받게 */
-#result .actions{
-  max-width:520px;
-  margin:18px auto 0;
-}
-
-/* =========================
-   ✅ “화면에서만” 자동 축소
-   - 저장은 1200x900 그대로
-========================= */
-
-#preview {
-  width: 100%;
-  overflow: hidden;
-}
-
-/* 기본: PC에서는 캔버스가 크니까 스크롤 허용 */
-#result {
-  overflow-x: auto;
-}
-
-/* ✅ 모바일: 화면 폭에 맞춰 미리보기 축소 */
-@media (max-width: 480px) {
-  #result {
-    overflow-x: hidden;
-  }
-
-  /* 1200px 캔버스를 viewport 폭에 맞춰 축소 */
-  #capture {
-    transform-origin: top left;
-    transform: scale(calc(100vw / 1200));
-  }
-
-  /* 축소된 높이만큼 preview가 따라오게 (정방형 방지) */
-  #preview {
-    height: calc(900px * (100vw / 1200));
-  }
-}
-
-
-
-
-
