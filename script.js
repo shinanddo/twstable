@@ -59,8 +59,20 @@ members.forEach((_, i) => {
 /* 결과 생성 */
 function generate() {
   members.forEach((_, i) => {
-    const g = document.getElementById(`range${i}`).value;
-    document.getElementById(`bar${i}`).style.width = g + "%";
+const g = Number(document.getElementById(`range${i}`).value);
+const s = 100 - g;
+
+const bar = document.getElementById(`bar${i}`);
+
+// 색칠된 바의 길이 (공/수 중 더 작은 쪽 기준)
+const fillWidth = Math.min(g, s) * 2;
+
+// 가운데 기준 위치 계산
+const left = 50 - fillWidth / 2;
+
+bar.style.width = fillWidth + "%";
+bar.style.left = left + "%";
+
     document.getElementById(`resultText${i}`).innerText =
       document.getElementById(`text${i}`).value || " ";
   });
@@ -78,3 +90,4 @@ function saveImage() {
     a.click();
   });
 }
+
