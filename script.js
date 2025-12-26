@@ -129,28 +129,40 @@ function generate() {
 
 // ====== 저장: 1200x900 “그대로” 저장 (scale=1) ======
 function saveImage() {
-  const node = document.getElementById("capture");
+  const target = document.getElementById("capture");
 
-  html2canvas(node, {
+  html2canvas(target, {
+    // ✅ 저장 해상도 고정: 1200x900 (4:3)
+    scale: 1,
     width: 1200,
     height: 900,
-    scale: 1,                 // ✅ 1200x900으로 저장(용량 감소)
+    windowWidth: 1200,
+    windowHeight: 900,
+
+    backgroundColor: "#fff",
     useCORS: true,
-    allowTaint: true,
-    backgroundColor: "#fff"
-  }).then(canvas => {
-    canvas.toBlob(blob => {
-      const url = URL.createObjectURL(blob);
+
+    // ✅ 핵심: 저장할 때만 미리보기 축소(transform) 제거
+    onclone: (doc) => {
+      const cloned = doc.getElementById("capture");
+      if (!cloned) return;
+
+      cloned.style.transform = "none";
+      cloned.style.transformOrigin = "top left";
+      cloned.style.width = "1200px";
+      cloned.style.height = "900px";
+    }
+  })
+    .then((canvas) => {
       const a = document.createElement("a");
-      a.href = url;
-      a.download = "gong_su_1200x900.png";
+      a.href = canvas.toDataURL("image/png");
+      a.download = "gong_su_4x3.png";
       a.click();
-      URL.revokeObjectURL(url);
-    }, "image/png");
-  }).catch(err => {
-    alert("이미지 저장 실패: 이미지 호스팅(CORS) 문제일 수 있어요.");
-    console.error(err);
-  });
+    })
+    .catch((err) => {
+      alert("이미지 저장 실패: 이미지 CORS 설정 문제일 수 있어요.");
+      console.error(err);
+    });
 }
 
 // ====== ✅ 모바일 자동축소(화면에서만) ======
@@ -205,3 +217,4 @@ window.addEventListener("resize", () => {
   const result = document.getElementById("result");
   if (result && getComputedStyle(result).display !== "none") updatePreviewScale();
 });
+
