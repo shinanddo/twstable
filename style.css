@@ -72,14 +72,20 @@ button{
 }
 
 /* ===== 결과 화면 기본 ===== */
+/* ===== 결과 화면 기본 ===== */
 #result{ display:none; }
 
 /* ✅ 화면용 프리뷰(여기서만 축소해서 보이게) */
 #preview{
-  width: 100%;
-  max-width: 100vw;
+  /* body padding 16px*2 = 32px 고려해서 스케일 계산 */
+  --s: min(1, calc((100vw - 32px) / 1200));
+
+  width: calc(1200px * var(--s));
+  height: calc(900px * var(--s));
   margin: 0 auto;
-  overflow: hidden;          /* 프리뷰 밖은 숨김 (캔버스 스케일링용) */
+
+  /* 캔버스가 정확히 들어오면 hidden이어도 안 잘림 */
+  overflow: hidden;
   background: #fff;
 }
 
@@ -95,43 +101,8 @@ button{
 
 /* ✅ 프리뷰에서만 스케일 적용 */
 #preview #capture{
+  transform: scale(var(--s));
   transform-origin: top left;
-}
-
-/* ==========================
-   PC 프리뷰 스케일 + 높이 보정
-   ========================== */
-@media (min-width: 481px){
-  /* 실제 프리뷰 너비를 vw로 계산 */
-  #preview{
-    /* 1200보다 커지지 않게 */
-    max-width: 1200px;
-  }
-
-  /* 스케일 */
-  #preview #capture{
-    transform: scale(calc(min(1200px, 100vw) / 1200));
-  }
-
-  /* ✅ 중요: 축소된 높이만큼 프리뷰 높이 확보(잘림 방지) */
-  #preview{
-    height: calc(900px * (min(1200px, 100vw) / 1200));
-  }
-}
-
-/* ==========================
-   모바일 프리뷰 스케일 + 높이 보정
-   ========================== */
-@media (max-width: 480px){
-  /* 모바일은 화면폭 기준으로 스케일 */
-  #preview #capture{
-    transform: scale(calc(100vw / 1200));
-  }
-
-  /* ✅ 중요: 축소된 높이만큼 프리뷰 높이 확보(잘림 방지) */
-  #preview{
-    height: calc(900px * (100vw / 1200));
-  }
 }
 
 /* 헤더 */
@@ -237,6 +208,7 @@ button{
   justify-content: flex-start;
   word-break:break-word;
 }
+
 
 
 
