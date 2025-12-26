@@ -243,17 +243,18 @@ button{
    텍스트 박스
 ============================= */
 .result-text{
+  font-family: 'Noto Sans KR', sans-serif;
   border:1px solid #000;
-  border-radius:16px;
+  border-radius:14px;
   padding:20px;
-  min-height:170px;
-  max-height:170px;
-
-  font-family:'Noto Sans KR', sans-serif;
-  font-size:20px;          /* ✅ 저장 시 가독성 확보 */
-  line-height:1.25;
-  text-align:left;
-
-  overflow:hidden;
+  min-height: 170px;         /* ✅ 높이 고정 */
+  max-height: 170px;
+  font-size:20px !important;       /* ✅ 기존 13 → 16 (2배 체감) */
+  line-height:1.2;
+  overflow: hidden; 
+  text-align: left;
+  align-items: center;
+  justify-content: flex-start;
   word-break:break-word;
 }
+
