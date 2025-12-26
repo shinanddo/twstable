@@ -134,6 +134,7 @@ button {
 }
 
 .bar {
+  position: relative;
   flex: 1;
   height: 12px;
   border: 1px solid #000;
@@ -142,6 +143,8 @@ button {
 }
 
 .bar-inner {
+  position: absolute;
+  top: 0;
   height: 100%;
   background: #000;
 }
@@ -153,3 +156,4 @@ button {
   font-size: 13px;
   min-height: 60px;
 }
+
