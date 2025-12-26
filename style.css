@@ -101,7 +101,7 @@ button {
 }
 
 .logo {
-  height: 1em;     /* h1 글자 높이 기준 */
+  height: 2em;     /* h1 글자 높이 기준 */
   width: auto;
   display: block;
 }
@@ -188,6 +188,7 @@ button {
     aspect-ratio: 4 / 3;
   }
 }
+
 
 
 
