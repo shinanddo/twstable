@@ -81,10 +81,17 @@ button{
   font-family:'Noto Sans KR', sans-serif;
 }
 
-/* ================= 결과 화면 ================= */
-#result{ display:none; }
+/* =============================
+   결과 화면 기본
+============================= */
+#result{
+  display:none;
+  font-family: 'Noto Sans KR', -apple-system, BlinkMacSystemFont, sans-serif;
+}
 
-/* ===== 프리뷰 박스 ===== */
+/* =============================
+   프리뷰 영역
+============================= */
 #preview{
   width:100%;
   max-width:1200px;
@@ -93,7 +100,9 @@ button{
   background:#fff;
 }
 
-/* ===== 저장 기준 캔버스 ===== */
+/* =============================
+   저장 기준 캔버스 (1200x900)
+============================= */
 #capture.canvas{
   width:1200px;
   height:900px;
@@ -103,63 +112,66 @@ button{
   flex-direction:column;
 }
 
-/* 프리뷰 스케일 */
+/* 프리뷰에서만 스케일 */
 #preview #capture{
   transform-origin: top left;
   transform: scale(var(--preview-scale, 1));
 }
 
-/* ================= 헤더 ================= */
+/* =============================
+   헤더
+============================= */
 .header{
   display:flex;
   justify-content:space-between;
   align-items:center;
-  margin-bottom:40px;
+  margin-bottom:48px;
 }
 
 .title-wrap{
   display:flex;
   align-items:center;
-  gap:10px;
-  font-size: 40px;
+  gap:12px;
 }
 
 .header h1{
-  font-size:1em;
+  font-size:48px;   /* ✅ 공수취향표 폰트 2배 체감 */
+  font-weight:700;
   margin:0;
 }
 
 .logo{
-  height:1.5em;
+  height:2em;       /* h1 기준 */
   width:auto;
-  display:block;
   object-fit:contain;
 }
 
 .credit{
   background:#000;
   color:#fff;
-  font-size:11px;
-  padding:10px 14px;
+  font-size:12px;
+  padding:10px 16px;
   border-radius:999px;
-  font-family:'Noto Sans KR', sans-serif;
 }
 
-/* ================= 2x3 그리드 ================= */
+/* =============================
+   2x3 그리드
+============================= */
 .grid{
   flex:1;
   display:grid;
-  grid-template-columns:1fr 1fr;
-  grid-template-rows:repeat(3, 1fr);
-  gap:32px 36px;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: repeat(3, 1fr);
+  gap:36px 40px;
 }
 
-/* ================= 카드 ================= */
+/* =============================
+   카드
+============================= */
 .card{
   display:flex;
+  gap:20px;
   align-items:center;
-  gap:16px;
-  height:100%;
 }
 
 .card img{
@@ -169,39 +181,49 @@ button{
   object-fit:cover;
 }
 
-.content{ flex:1; }
+.content{
+  flex:1;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+}
 
-/* ================= 공/수 바 ================= */
+/* =============================
+   공 / 수 바 영역
+============================= */
 .bar-wrap{
   display:flex;
   align-items:center;
   gap:12px;
-  margin-bottom:14px;
+  margin-bottom:16px;
   font-family:'Noto Sans KR', sans-serif;
 }
 
-/* 공/수 숫자 컬럼 */
+/* 공 / 수 텍스트 + 숫자 */
 .side-col{
-  width:36px;
-  text-align:center;
-  line-height:1.05;              /* ✅ 행간 줄임 */
+  width:48px;
+  display:flex;
+  flex-direction:column;
+  align-items:center;        /* ✅ 가운데 정렬 */
+  justify-content:center;
+  line-height:1.1;           /* ✅ 행간 줄임 */
+  font-family:'Noto Sans KR', sans-serif;
 }
 
 .side-col .label{
-  font-size:12px;
-  line-height:1.05;
+  font-size:13px;
+  font-weight:500;
 }
 
 .side-col .num{
   font-size:16px;
   font-weight:700;
-  line-height:1.05;
 }
 
-/* 바 전체 */
+/* 바 */
 .bar{
   position:relative;
-  width:100%;
+  flex:1;
   height:16px;
   background:#eee;
   border:1px solid #000;
@@ -209,7 +231,6 @@ button{
   overflow:hidden;
 }
 
-/* 이동 바 */
 .bar-inner{
   position:absolute;
   top:0;
@@ -218,19 +239,21 @@ button{
   border-radius:999px;
 }
 
-/* ================= 텍스트 박스 ================= */
+/* =============================
+   텍스트 박스
+============================= */
 .result-text{
-  font-family:'Noto Sans KR', sans-serif;
   border:1px solid #000;
-  border-radius:14px;
+  border-radius:16px;
   padding:20px;
   min-height:170px;
   max-height:170px;
-  font-size:20px;
-  line-height:1.25;              /* 살짝만 여유 */
-  overflow:hidden;
+
+  font-family:'Noto Sans KR', sans-serif;
+  font-size:20px;          /* ✅ 저장 시 가독성 확보 */
+  line-height:1.25;
   text-align:left;
+
+  overflow:hidden;
   word-break:break-word;
 }
-
-
