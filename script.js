@@ -21,12 +21,11 @@ members.forEach((m, i) => {
 
 <div class="range-row">
   <span class="side">공 <b id="gPct${i}">50%</b></span>
-
+  
   <input type="range" min="0" max="100" value="50" id="range${i}" aria-label="${m.name} 공수 비율">
 
   <span class="side">수 <b id="sPct${i}">50%</b></span>
 </div>
-
 
       <textarea id="text${i}" placeholder="텍스트 작성 부분"></textarea>
     </div>
@@ -108,6 +107,7 @@ function saveImage() {
     <!-- 결과 카드들 -->
   </div>
 </div>
+
 
 
 
