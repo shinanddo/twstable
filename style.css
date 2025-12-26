@@ -75,34 +75,32 @@ button{
 /* ===== 결과 화면 기본 ===== */
 #result{ display:none; }
 
-/* ✅ 화면용 프리뷰(여기서만 축소해서 보이게) */
+/* ✅ 프리뷰 박스: 화면에 보이는 "창" */
 #preview{
-  /* body padding 16px*2 = 32px 고려해서 스케일 계산 */
-  --s: min(1, calc((100vw - 32px) / 1200));
-
-  width: calc(1200px * var(--s));
-  height: calc(900px * var(--s));
+  width: 100%;
+  max-width: 1200px;   /* PC에선 1200까지만 */
   margin: 0 auto;
-
-  /* 캔버스가 정확히 들어오면 hidden이어도 안 잘림 */
-  overflow: hidden;
+  overflow: hidden;    /* 프리뷰 밖은 숨김 */
   background: #fff;
+
+  /* JS가 계산한 높이를 넣어줄 거라 여기선 자동 */
+  height: auto;
 }
 
-/* ✅ 원본 캔버스(저장 기준: 항상 1200x900 유지) */
+/* ✅ 원본 캔버스(저장 기준: 항상 1200x900) */
 #capture.canvas{
   width: 1200px;
   height: 900px;
   background: #fff;
-  padding: 48px;             /* 저장 여백(마진) */
+  padding: 48px;
   display: flex;
   flex-direction: column;
 }
 
-/* ✅ 프리뷰에서만 스케일 적용 */
+/* ✅ 프리뷰에서만 축소(스케일 값은 JS가 넣음) */
 #preview #capture{
-  transform: scale(var(--s));
   transform-origin: top left;
+  transform: scale(var(--preview-scale, 1));
 }
 
 /* 헤더 */
@@ -208,6 +206,7 @@ button{
   justify-content: flex-start;
   word-break:break-word;
 }
+
 
 
 
