@@ -138,13 +138,3 @@ function saveImage() {
 }
 
 
-
-
-
-
-
-
-
-
-
-
