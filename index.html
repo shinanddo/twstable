@@ -1,46 +1,45 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>공수취향표</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>공수취향표</title>
 
-<link rel="stylesheet" href="./style.css"> 
-<script src="./script.js" defer></script>
+  <link rel="stylesheet" href="./style.css" />
+  <script src="./script.js" defer></script>
 
-<script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
-
+  <!-- html2canvas는 script.js보다 먼저 로드되는게 안전 -->
+  <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
 </head>
 
 <body>
-
-<!-- 입력 화면 -->
-<div id="controls">
-  <h2>공수취향표 생성</h2>
-  <div id="inputs"></div>
-  <button onclick="generate()">결과 생성</button>
-</div>
-
-<!-- 결과 화면 -->
-<div id="result">
-  <div id="preview">
-    <div class="canvas" id="capture">
-   <div class="header">
-  <div class="title-wrap">
-    <img class="logo" src="https://i.imgur.com/lxO0ay6.png" alt="logo">
-    <h1>공수취향표</h1>
+  <!-- 입력 화면 -->
+  <div id="controls">
+    <h2>공수취향표 생성</h2>
+    <div id="inputs"></div>
+    <button type="button" onclick="generate()">결과 생성</button>
   </div>
-  <div class="credit">@shinanddo</div>
-</div>
-    <div class="grid" id="resultList"></div>
-  </div>
-  <button onclick="saveImage()">이미지 저장</button>
-</div>
 
+  <!-- 결과 화면 -->
+  <div id="result">
+    <!-- 화면에서만 축소해서 보여주는 프리뷰 래퍼 -->
+    <div id="preview">
+      <!-- 저장 대상(원본 1200x900 고정) -->
+      <div class="canvas" id="capture">
+        <div class="header">
+          <div class="title-wrap">
+            <img class="logo" src="https://i.imgur.com/lxO0ay6.png" alt="logo" />
+            <h1>공수취향표</h1>
+          </div>
+          <div class="credit">@shinanddo</div>
+        </div>
+
+        <div class="grid" id="resultList"></div>
+      </div>
+    </div>
+
+    <!-- ✅ 버튼은 preview 바깥: 축소/overflow 영향 안 받게 -->
+    <button type="button" onclick="saveImage()">이미지 저장</button>
+  </div>
 </body>
 </html>
-
-
-
-
-
