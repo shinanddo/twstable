@@ -1,10 +1,10 @@
 * { box-sizing: border-box; }
 
-body{
-  margin:0;
-  padding:16px;
-  font-family:-apple-system,BlinkMacSystemFont,sans-serif;
-  background:#fff;
+body {
+  margin: 0;
+  padding: 16px;
+  font-family: 'Noto Sans KR', -apple-system, BlinkMacSystemFont, sans-serif;
+  background: #fff;
 }
 
 /* 공통 버튼 */
@@ -212,5 +212,6 @@ button{
   text-align: left;
   word-break:break-word;
 }
+
 
 
