@@ -32,7 +32,6 @@ inputs.innerHTML += `
     </div>
 
 <textarea id="text${i}" placeholder="텍스트 작성" maxlength="${MAX_CHARS}"></textarea>
-<div class="counter" id="count${i}">0/${MAX_CHARS}</div>
 
   </div>
 `;
@@ -238,6 +237,7 @@ window.addEventListener("resize", () => {
   const result = document.getElementById("result");
   if (result && getComputedStyle(result).display !== "none") updatePreviewScale();
 });
+
 
 
 
