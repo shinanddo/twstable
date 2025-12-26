@@ -229,7 +229,7 @@ button{
   padding:20px;
   min-height: 170px;         /* ✅ 높이 고정 */
   max-height: 170px;
-  font-size:22px !important;       /* ✅ 기존 13 → 16 (2배 체감) */
+  font-size:20px !important;       /* ✅ 기존 13 → 16 (2배 체감) */
   line-height:1.2;
   overflow: hidden; 
   text-align: left;
@@ -237,6 +237,7 @@ button{
   justify-content: flex-start;
   word-break:break-word;
 }
+
 
 
 
