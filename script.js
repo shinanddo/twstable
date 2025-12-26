@@ -129,40 +129,54 @@ function generate() {
 
 // ====== 저장: 1200x900 “그대로” 저장 (scale=1) ======
 function saveImage() {
-  const target = document.getElementById("capture");
+  const capture = document.getElementById("capture");
 
-  html2canvas(target, {
-    // ✅ 저장 해상도 고정: 1200x900 (4:3)
-    scale: 1,
+  // ✅ 프리뷰용 transform이 capture에 걸려있으면 저장이 망가질 수 있음 → 임시 제거
+  const prevTransform = capture.style.transform;
+  const prevOrigin = capture.style.transformOrigin;
+  capture.style.transform = "none";
+  capture.style.transformOrigin = "top left";
+
+  html2canvas(capture, {
+    scale: 1,                 // ✅ 최종 1200x900으로 저장할 거라 1로
+    useCORS: true,
+    allowTaint: true,
+    backgroundColor: "#fff",
     width: 1200,
     height: 900,
     windowWidth: 1200,
-    windowHeight: 900,
+    windowHeight: 900
+  }).then((canvas) => {
+    // ✅ 모바일에서 캔버스가 작게 찍히는 이슈 대비: 1200x900에 "fit"
+    const out = document.createElement("canvas");
+    out.width = 1200;
+    out.height = 900;
 
-    backgroundColor: "#fff",
-    useCORS: true,
+    const ctx = out.getContext("2d");
+    ctx.fillStyle = "#fff";
+    ctx.fillRect(0, 0, out.width, out.height);
 
-    // ✅ 핵심: 저장할 때만 미리보기 축소(transform) 제거
-    onclone: (doc) => {
-      const cloned = doc.getElementById("capture");
-      if (!cloned) return;
+    // canvas를 1200x900에 맞춰 스케일링(비율 유지)
+    const scale = Math.min(out.width / canvas.width, out.height / canvas.height);
+    const dw = canvas.width * scale;
+    const dh = canvas.height * scale;
+    const dx = (out.width - dw) / 2;
+    const dy = (out.height - dh) / 2;
 
-      cloned.style.transform = "none";
-      cloned.style.transformOrigin = "top left";
-      cloned.style.width = "1200px";
-      cloned.style.height = "900px";
-    }
-  })
-    .then((canvas) => {
-      const a = document.createElement("a");
-      a.href = canvas.toDataURL("image/png");
-      a.download = "gong_su_4x3.png";
-      a.click();
-    })
-    .catch((err) => {
-      alert("이미지 저장 실패: 이미지 CORS 설정 문제일 수 있어요.");
-      console.error(err);
-    });
+    ctx.drawImage(canvas, dx, dy, dw, dh);
+
+    const a = document.createElement("a");
+    a.href = out.toDataURL("image/png");
+    a.download = "gong_su_1200x900.png";
+    a.click();
+  }).catch((err) => {
+    alert("이미지 저장 실패: CORS 또는 렌더링 문제일 수 있어요.");
+    console.error(err);
+  }).finally(() => {
+    // ✅ 원복
+    capture.style.transform = prevTransform;
+    capture.style.transformOrigin = prevOrigin;
+  });
 }
 
 // ====== ✅ 모바일 자동축소(화면에서만) ======
@@ -217,4 +231,5 @@ window.addEventListener("resize", () => {
   const result = document.getElementById("result");
   if (result && getComputedStyle(result).display !== "none") updatePreviewScale();
 });
+
 
