@@ -130,7 +130,7 @@ button{
 }
 
 .logo{
-  height:2em;
+  height:1.5em;
   width:auto;
   display:block;
   object-fit:contain;
@@ -232,4 +232,5 @@ button{
   text-align:left;
   word-break:break-word;
 }
+
 
