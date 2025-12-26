@@ -229,12 +229,13 @@ button{
   padding:20px;
   min-height: 170px;         /* ✅ 높이 고정 */
   max-height: 170px;
-  font-size:18px !important;       /* ✅ 기존 13 → 16 (2배 체감) */
+  font-size:22px !important;       /* ✅ 기존 13 → 16 (2배 체감) */
   line-height:1.25;
   overflow: hidden; 
   text-align: left;
   word-break:break-word;
 }
+
 
 
 
