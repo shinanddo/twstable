@@ -202,10 +202,11 @@ button{
   line-height:1.2;
   overflow: hidden; 
   text-align: left;
-  align-items: center;
+  align-items: flex-start;
   justify-content: flex-start;
   word-break:break-word;
 }
+
 
 
 
